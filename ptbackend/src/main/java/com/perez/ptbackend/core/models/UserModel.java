@@ -28,8 +28,6 @@ public class UserModel extends UserDateAuditModel<UUID> {
     @Size(max = 100)
     private String username;
     private String password;
-    @NotNull(message = Message.NOT_EMPTY_MESSAGE)
-    private UUID companyId;
     private boolean changePassword = true;
     @NotNull(message = Message.NOT_EMPTY_MESSAGE)
     private RoleModel role;
