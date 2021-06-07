@@ -71,11 +71,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(unauthorizedHandler).and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().anonymous().and()
                 .authorizeRequests().antMatchers("/v1/auth/").permitAll()
-                .antMatchers("/swagger-ui/").permitAll()
+                .antMatchers("/products/most-wanted").permitAll().antMatchers("/swagger-ui/")
+                .permitAll()
                 .antMatchers("/v1/api-docs", "/swagger-resources",
                         "/swagger-resources/configuration/ui",
                         "/swagger-resources/configuration/security")
-                .permitAll().antMatchers("/actuator/**").permitAll()
+                .permitAll().antMatchers("/actuator/**").permitAll().antMatchers("/**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/v1").permitAll().and().authorizeRequests()
                 .anyRequest().authenticated();
 
