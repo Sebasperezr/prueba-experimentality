@@ -17,7 +17,7 @@ import com.perez.ptbackend.infrastructore.persistence.jpa.base.UserDateAuditEnti
 
 
 @Entity
-@Table(name = "tbl_users")
+@Table(name = "users")
 public class UserEntity extends UserDateAuditEntity implements Serializable {
 
     /**
@@ -38,8 +38,7 @@ public class UserEntity extends UserDateAuditEntity implements Serializable {
     @Column(nullable = false, length = 100, unique = true)
     private String username;
 
-    @Column(nullable = true)
-    private UUID companyId;
+
 
     @Column(nullable = false, length = 100)
     private String password;// one time password
@@ -47,7 +46,7 @@ public class UserEntity extends UserDateAuditEntity implements Serializable {
     private boolean changePassword;
 
     @ManyToMany()
-    @JoinTable(name = "tbl_users_roles", joinColumns = @JoinColumn(name = "user_id"),
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<RoleEntity> roles = new HashSet<>();
 
@@ -79,13 +78,7 @@ public class UserEntity extends UserDateAuditEntity implements Serializable {
         this.username = username;
     }
 
-    public UUID getCompanyId() {
-        return companyId;
-    }
 
-    public void setCompanyId(UUID companyId) {
-        this.companyId = companyId;
-    }
 
     public String getPassword() {
         return password;

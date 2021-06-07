@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import com.perez.ptbackend.infrastructore.persistence.jpa.base.UserDateAuditEntity;
 
 @Entity
-@Table(name = "tbl_roles")
+@Table(name = "roles")
 public class RoleEntity extends UserDateAuditEntity implements Serializable {
 
     /**
