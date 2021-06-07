@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-PtbackendApplication<ptbackend>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.perez.ptbackend.PtbackendApplication",
+            "projectName": "ptbackend",
+            "args": ""
+        }
+    ]
+}
