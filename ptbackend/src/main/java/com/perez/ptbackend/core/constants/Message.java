@@ -8,6 +8,7 @@ public class Message {
         public static final String USER_USERNAME_FOUND = "Usuario no disponible";
         public static final String USER_ROLE_REQUIRED = "El role es requerido";
 
+        public static final String PRODUCT_NOT_FOUND = "Producto no disponible";
 
         private Message() {}
 }

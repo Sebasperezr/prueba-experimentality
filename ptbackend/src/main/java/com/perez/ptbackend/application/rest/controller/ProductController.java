@@ -2,6 +2,7 @@ package com.perez.ptbackend.application.rest.controller;
 
 
 import java.util.UUID;
+import javax.validation.Valid;
 import com.perez.ptbackend.core.models.FilterModel;
 import com.perez.ptbackend.core.models.ProductModel;
 import com.perez.ptbackend.core.ports.inputs.ProductService;
@@ -17,6 +18,11 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 public class ProductController {
     @Autowired
     private ProductService service;
+
+    @PostMapping(path = "${app.api.version.v1}/product")
+    public ProductModel save(@RequestBody @Valid ProductModel model) {
+        return service.save(model);
+    }
 
     @PostMapping(path = "${app.api.version.v1}/products")
     public Page<ProductModel> list(@RequestBody FilterModel<ProductModel> model) {
