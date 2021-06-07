@@ -8,6 +8,8 @@ public class Error {
 
     /******************** GENERAL ********************/
     public static final String EMPTITY_NULL = "EmptityNull";
+    /******************** Product ********************/
+    public static final String PRODUCT_NOT_FOUND = "ProductNotFound";
 
 
 

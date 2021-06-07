@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.UUID;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.perez.ptbackend.core.constants.Message;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,6 +23,7 @@ public class ProductModel extends UserDateAuditModel<UUID> {
     private double price;
     private double priceDiscont;
     private int discount;
+    @JsonManagedReference
     private Set<ImageModel> images;
     private boolean mostWanted;
 

@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.UUID;
 import javax.persistence.criteria.Predicate;
 import com.perez.ptbackend.core.constants.Constant;
+import com.perez.ptbackend.core.constants.Error;
+import com.perez.ptbackend.core.constants.Message;
+import com.perez.ptbackend.core.exception.NotFound;
 import com.perez.ptbackend.core.mappers.ProductMapper;
 import com.perez.ptbackend.core.models.FilterModel;
 import com.perez.ptbackend.core.models.ProductModel;
@@ -27,8 +30,11 @@ public class ProductServiceImp extends BaseService<ProductModel> implements Prod
 
     @Override
     public ProductModel save(ProductModel model) {
-        // TODO Auto-generated method stub
-        return null;
+        validToSave(model);
+        var entity = modelMapper.convert(model);
+        productRepository.save(entity);
+        model.setId(entity.getId());
+        return model;
     }
 
     @Override
@@ -63,8 +69,10 @@ public class ProductServiceImp extends BaseService<ProductModel> implements Prod
 
     @Override
     public ProductModel findById(UUID id) {
-        // TODO Auto-generated method stub
-        return null;
+        var entity = productRepository.findById(id).orElseThrow(
+                () -> new NotFound(Error.PRODUCT_NOT_FOUND, Message.PRODUCT_NOT_FOUND));
+
+        return modelMapper.convert(entity);
     }
 
     @Override
@@ -73,6 +81,25 @@ public class ProductServiceImp extends BaseService<ProductModel> implements Prod
         return null;
     }
 
+
+
+    @Override
+    public Page<ProductModel> listMostWanted(FilterModel<ProductModel> model) {
+        var pageable = PageRequest.of(model.getPage(), model.getSize(), getSort(model));
+
+        return modelMapper.convert(productRepository.findAll((root, query, cb) -> {
+            List<Predicate> predicates = new ArrayList<>();
+            predicates.add(cb.equal(root.get("mostWanted"), true));
+
+            return cb.and(predicates.toArray(new Predicate[0]));
+
+        }, pageable));
+    }
+
+
+    public void validToSave(ProductModel model) {
+        this.validate(model);
+    }
 
     private Sort getSort(FilterModel<ProductModel> model) {
         if (model.getSort() != null) {
@@ -85,24 +112,6 @@ public class ProductServiceImp extends BaseService<ProductModel> implements Prod
             return Sort.by(Sort.Direction.ASC, Constant.CREATED_AT);
         }
 
-    }
-
-    @Override
-    public Page<ProductModel> listMostWanted(FilterModel<ProductModel> model) {
-        var pageable = PageRequest.of(model.getPage(), model.getSize(), getSort(model));
-
-        return modelMapper.convert(productRepository.findAll((root, query, cb) -> {
-            List<Predicate> predicates = new ArrayList<>();
-            var value = model.getFilters();
-            if (value != null) {
-
-                predicates.add(cb.equal(root.get("mostWanted"), true));
-
-            }
-
-            return cb.and(predicates.toArray(new Predicate[0]));
-
-        }, pageable));
     }
 
 }
