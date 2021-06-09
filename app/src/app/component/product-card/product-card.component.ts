@@ -21,8 +21,7 @@ export class ProductCardComponent implements OnInit {
   priceDiscount(): any {
     let result = '';
     this.product.prices.prices.forEach((element: any) => {
-      if (element.type == 'promotion') console.log();
-      result = element.amount;
+      if (element.type == 'promotion') result = element.amount;
     });
     return result;
   }

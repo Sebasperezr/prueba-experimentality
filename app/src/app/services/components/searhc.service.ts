@@ -10,12 +10,10 @@ export class SearhcService {
   constructor() {}
 
   searhc(searhc: []) {
-    console.log('llega', searhc);
     this.result.next(searhc);
   }
 
   getValue(): any {
-    console.log('get value', this.result);
     return this.result.getValue();
   }
 
