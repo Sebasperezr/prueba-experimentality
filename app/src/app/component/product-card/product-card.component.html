@@ -1,0 +1,34 @@
+<div class="card card-size">
+  <img
+    [src]="'https://http2.mlstatic.com/D_' + product.thumbnail_id + '-O.webp'"
+    class="card-img-top"
+    height="300px"
+    [alt]="product.title"
+  />
+  <div class="card-body">
+    <div class="row">
+      <div class="col-12">
+        <h6 class="card-title text-left">{{ product.title }}</h6>
+      </div>
+      <div class="col-6">
+        <h5 class="card-title text-primary">
+          <strong *ngIf="onPromotion()">
+            {{ priceDiscount() | currency: "$":"symbol":"1.0-0" }}
+          </strong>
+          <strong *ngIf="!onPromotion()">
+            {{ product.price | currency: "$":"symbol":"1.0-0" }}
+          </strong>
+        </h5>
+      </div>
+      <div class="col-6">
+        <h6 class="card-title">
+          <div *ngIf="onPromotion()">
+            <s> {{ product.price | currency: "$":"symbol":"1.0-0" }}</s>
+          </div>
+        </h6>
+      </div>
+    </div>
+
+    <a href="#" class="btn btn-dark">Agregar al carrito</a>
+  </div>
+</div>
