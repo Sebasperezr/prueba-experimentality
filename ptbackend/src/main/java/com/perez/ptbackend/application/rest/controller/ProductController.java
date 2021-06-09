@@ -34,6 +34,14 @@ public class ProductController {
         return service.listMostWanted(model);
     }
 
+    @GetMapping(path = "${app.api.version.v1}/product/name/{name}")
+    public Page<ProductModel> findByName(@PathVariable("name") String name) {
+        var model = new FilterModel<ProductModel>();
+        model.setFilters(new ProductModel());
+        model.getFilters().setName(name);
+        return service.list(model);
+    }
+
     @GetMapping(path = "${app.api.version.v1}/product/{idProduct}")
     public ProductModel find(@PathVariable("idProduct") UUID idProduct) {
         return service.findById(idProduct);

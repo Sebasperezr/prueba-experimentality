@@ -19,7 +19,6 @@ export class ResultSearchComponent implements OnInit, OnDestroy {
     let subs = this.searhcService.getObservable().subscribe(
       (data: any) => {
         this.products = this.searhcService.getValue().results;
-        console.log(this.products, data);
       },
       (error) => {
         console.log(error);
