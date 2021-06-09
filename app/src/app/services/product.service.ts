@@ -19,4 +19,8 @@ export class ProductService extends BaseService<productModel> {
     let url = environment.api + 'search?category=MCO1430';
     return this.http.get<Page<any>>(url);
   }
+  searhc(criterial: string) {
+    let url = environment.api + 'search?q=' + criterial;
+    return this.http.get<Page<any>>(url);
+  }
 }

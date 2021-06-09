@@ -11,8 +11,6 @@ export class ProductsMostWantedComponent implements OnInit {
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    console.log('init');
-
     this.listOffererAuctions();
   }
 
@@ -20,7 +18,6 @@ export class ProductsMostWantedComponent implements OnInit {
     this.productService.listMostWanted().subscribe(
       (data: any) => {
         this.products = data.results;
-        console.log(data);
       },
       (error: any) => {
         console.log(error);
