@@ -18,11 +18,11 @@ export class ProductsMostWantedComponent implements OnInit {
 
   listOffererAuctions() {
     this.productService.listMostWanted().subscribe(
-      (data) => {
+      (data: any) => {
         this.products = data.results;
         console.log(data);
       },
-      (error) => {
+      (error: any) => {
         console.log(error);
       }
     );
